@@ -26,12 +26,15 @@
 
 ## I. Logiciels & Machines utilisées
 
-- GNS3 pour virtualiser une infrastructure réseau
-- Virtualbox pour la **GNS3 VM** 
-- VMWare pour les 3 machines : **client1**, **server1** et **admin1**
-- 3 Switchs
-- 1 routeur cisco (C7200)
-- des VPC's
+- **GNS3** pour **virtualiser une infrastructure réseau**
+- **Virtualbox** pour la **GNS3 VM** 
+- **VMWare** pour les **postes Windows**
+- 3 **Switchs IOU L2**
+- 2 **routeurs Cisco C7200**
+- Un **serveur** sous **Windows Server 2022** : `server1`
+- Un **client** sous **Windows 10** : `client1`
+- 2 **VPC's** qui récupèrent leur configuration IP automatiquement avec `ip dhcp`
+    - `PC1` & `PC2`
 
 ## II. Architecture réseaux
 ### Infrastructure sur GNS3
@@ -56,16 +59,18 @@
 
 ## III. Technologies & services utilisés/mis en place
 ### 1. DHCP
-
 - Service installé sur le serveur : il va distribuer aux clients (Windows & VPC's) une adresse IP, le nom de domaine 'montagnier.labo', l'IP du routeur ainsi que celle du serveur DNS.
 
-**Etendue client qui distribue :**
+#### Configuration de l'étendue client
+![Option d'étendue](/Img/Option_Etendue.png)
+
+**L'étendue client distribue :**
 - Une **adresse IP** entre `192.168.102.20` & `192.168.102.200`
 - **Le nom du domaine** `montagnier.labo`
 - **L'IP de la passerelle** (routeur `R2`) qui est `192.168.102.1`
 - **L'IP du serveur DNS** (lui même car il fait les 2) donc `192.168.100.2`
-![Option d'étendue](/Img/Option_Etendue.png)
 
+#### Récuperer une adresse IP
 - Sur le client windows : 
 Config IP en dhcp -> `ipconfig /renew`
 - Sur les VPC's : 
@@ -84,7 +89,6 @@ Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dan
 **Service installé sur le serveur : pour la traduction des noms de domaines en IP & inversement.**
 
 #### Zones de recherche DNS
-
 Dans le domaine `montagnier.labo`
 - Zone de recherche directe
 
@@ -98,17 +102,22 @@ Dans le domaine `montagnier.labo`
 
 ![Recherche indirecte 3](/Img/Recherche_Indirecte3.png)
 
-#### Vérification du fonctionnement du DNS
+#### Vérification du fonctionnement du DNS avec nslookup
+##### Résolution locale nom/ip machine
 - Sur le serveur :
 ```
-PS C:\Users\Administrateur> nslookup client1
+PS C:\Users\Administrateur> nslookup
+Serveur par dÚfaut :   Server1.montagnier.labo
+Address:  192.168.100.2
+
+> client1
 Serveur :   Server1.montagnier.labo
 Address:  192.168.100.2
 
 Nom :    client1.montagnier.labo
 Address:  192.168.102.21
 
-PS C:\Users\Administrateur> nslookup 192.168.102.21
+> 192.168.102.21
 Serveur :   Server1.montagnier.labo
 Address:  192.168.100.2
 
@@ -117,25 +126,52 @@ Address:  192.168.102.21
 ```
 - Sur le client : 
 ```
-PS C:\WINDOWS\system32> nslookup server1
+PS C:\Users\yrlan> nslookup server1
+Serveur :   Server1.montagnier.labo
+Address:  192.168.100.2
+
+Nom :    server1.montagnier.labo
+Address:  192.168.100.2
+******************************************
+PS C:\Users\yrlan> nslookup 192.168.102.2
 Serveur :   Server1.montagnier.labo
 Address:  192.168.100.2
 
 Nom :    server1.montagnier.labo
 Address:  192.168.100.2
 ```
+##### Résolution nom de domaine extérieur (internet)
+```
+
+```
 
 ### 3. AD-DS
 
 - Service géré par le serveur : utilisé la gestion des utilisateurs, ordinateurs, politiques de sécurité, périphérique.
 
-#### Users and Computers
+#### Unité d'organisation
+3 OU dans le domaine montagnier.labo : 
+- Ordinateurs
+    - `client1.montagnier.labo`
+    - 
+- Utilisateurs
+    - Un **administrateur du domaine** : 
+        - AdminLabo `admLabo@montagnier.labo`
+        - Mot de passe : `Admin123`
+    - Deux **utilisateurs du domaine** :
+        - Enzo Peyrataud `enzo@montagnier.labo`
+        - Yrlan Montagnier `yrlan@montagnier.labo`
+        - Mot de passe : `Client123`
+    - Ils accèdent a leur session sur le domaine à l'aide de la machine **`client1.montagnier.labo`**
+- Groupes
+    - Admins
+    - Clients
+    - Serveurs
+#### Ordinateurs
+#### Utilisateurs
+#### Groupes
 
-- Création et gestion des : Unités d’Organisation, utilisateurs, groupes, ordinateurs...
 
-- Deux utilisateurs : **Enzo Peyrataud** et **Yrlan Montagnier**
-  Leur mot de passe : **Client123**
-  Ils accèdent au domaine à l'aide de la machine **"client1.montagnier.labo"**
 
 - Ils sont membres du groupe **"Clients"**
 
@@ -164,6 +200,14 @@ Address:  192.168.100.2
 
 - **Configuration de SW3 : 
 :file_folder: [running_config_SW3](/Conf/Switchs/run-conf_SW3.conf)**
+
+```
+PS C:\Users\Administrateur> ping 8.8.8.8
+
+Envoi d’une requête 'Ping'  8.8.8.8 avec 32 octets de données :
+Réponse de 8.8.8.8 : octets=32 temps=131 ms TTL=113
+Réponse de 8.8.8.8 : octets=32 temps=86 ms TTL=113
+```
 
 ### 5. Partage réseau
 

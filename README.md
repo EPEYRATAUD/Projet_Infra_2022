@@ -78,7 +78,7 @@ DORA IP 192.168.102.23/24 GW 192.168.102.1
 ```
 
 Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dans l'étendue 192.168.101.:
-![Bail DHCP](/Img/Option_Etendue.png)
+![Bail DHCP](/Img/Bail_DHCP.png)
 
 ### 2. DNS
 **Service installé sur le serveur : pour la traduction des noms de domaines en IP & inversement.**

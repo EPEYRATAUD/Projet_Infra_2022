@@ -1,0 +1,116 @@
+R2#show run
+Building configuration...
+
+Current configuration : 1457 bytes
+!
+! Last configuration change at 11:34:20 UTC Wed Jun 1 2022
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+!
+!
+ip domain list 1
+ip domain name montagnier.labo
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ description LAN-A
+ ip address 192.168.10.2 255.255.255.0
+ duplex full
+!
+interface FastEthernet1/0
+ description LAN-B
+ no ip address
+ ip helper-address 192.168.100.2
+ speed auto
+ duplex full
+!
+interface FastEthernet1/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.100.1 255.255.255.0
+ ip helper-address 192.168.100.2
+!
+interface FastEthernet1/0.101
+ encapsulation dot1Q 101
+ ip address 192.168.101.1 255.255.255.0
+ ip helper-address 192.168.100.2
+!
+interface FastEthernet1/0.102
+ encapsulation dot1Q 102
+ ip address 192.168.102.1 255.255.255.0
+ ip helper-address 192.168.100.2
+!
+interface FastEthernet1/1
+ no ip address
+ shutdown
+ speed auto
+ duplex auto
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 192.168.10.1
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+end

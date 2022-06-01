@@ -66,8 +66,8 @@
 - **L'IP du serveur DNS** (lui même car il fait les 2) donc `192.168.100.2`
 ![](https://i.imgur.com/9LwXnCe.png)
 
-- Sur les clients : 
-Config IP en dhcp -> ipconfig /renew
+- Sur le client windows : 
+Config IP en dhcp -> `ipconfig /renew`
 - Sur les VPC's : 
 ```
 PC1> ip dhcp

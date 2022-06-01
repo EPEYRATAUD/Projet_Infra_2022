@@ -36,7 +36,7 @@
 ## II. Architecture réseaux
 ### Infrastructure sur GNS3
 
-![image](https://user-images.githubusercontent.com/71253160/171411052-64d87bd0-63ca-4eb6-9b5b-c2426d2f4364.png)
+![image](/Img/Architecture_Réseaux.png)
 
 ### A. Tableau d'adressage
 

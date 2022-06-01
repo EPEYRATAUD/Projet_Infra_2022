@@ -87,9 +87,11 @@ Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dan
 
 Dans le domaine `montagnier.labo`
 - Zone de recherche directe
+
 ![](https://i.imgur.com/thUuNh3.png)
 
 - Zone de recherche indirecte
+
 ![](https://i.imgur.com/C5jRPLs.png)
 
 ![](https://i.imgur.com/7fv2ULJ.png)

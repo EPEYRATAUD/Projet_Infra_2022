@@ -8,7 +8,7 @@
 - [II. Architecture réseaux](#ii-architecture-réseaux)
   - [A. Tableau d'adressage](#a-tableau-d'adressage)
   - [B. Tableau des réseaux](#b-tableau-des-réseaux)
-- [III. Technologies utilisées](#iii-technologies-utilisées)
+- [III. Technologies & Services utilisés/mis en place](#iii-technologies--services-utilisésmis-en-place)
   - [1. DHCP](#1-dhcp)
   - [2. DNS](#2-dns)
   - [3. AD-DS](#3-ad-ds)

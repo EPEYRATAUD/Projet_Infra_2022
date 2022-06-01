@@ -154,19 +154,19 @@ Address:  192.168.100.2
 - Node `Cloud` sur GNS3 connectée à `R1`
 
 - **Configuration de R1 : 
-:file_folder: [running_config_R1](/conf/run-conf_R1.conf)**
+:file_folder: [running_config_R1](/Conf/run-conf_R1.conf)**
 
 - **Configuration de R2 : 
-:file_folder: [running_config_R2](/conf/run-conf_R2.conf)**
+:file_folder: [running_config_R2](/Conf/run-conf_R2.conf)**
 
 - **Configuration de SW1 : 
-:file_folder: [running_config_SW1](/conf/run-conf_SW1.conf)**
+:file_folder: [running_config_SW1](/Conf/run-conf_SW1.conf)**
 
 - **Configuration de SW2 : 
-:file_folder: [running_config_SW2](/conf/run-conf_SW2.conf)**
+:file_folder: [running_config_SW2](/Conf/run-conf_SW2.conf)**
 
 - **Configuration de SW3 : 
-:file_folder: [running_config_SW3](/conf/run-conf_SW3.conf)**
+:file_folder: [running_config_SW3](/Conf/run-conf_SW3.conf)**
 
 ### 5. Partage réseau
 
@@ -179,8 +179,8 @@ Address:  192.168.100.2
 1. On crée un partage SMB sur le Windows Server à l'emplacement `C:/Shares/Partage_Client` limité au groupe `Clients` pour que seuls eux et les admins y aient accès.
 2. On met en place une GPO pour le groupe `Clients` qui programme le lancement d'un script Powershell à l'ouverture de session
 3. **Voici le contenu du script :
-:file_folder: Script partage réseau client : [partageClient.ps1](/conf/partageClient.ps1)**
-**:file_folder: Script partage réseau admin : [partageDSI.ps1](/conf/partageDSI.ps1)**
+:file_folder: Script partage réseau client : [partageClient.ps1](/Conf/partageClient.ps1)**
+**:file_folder: Script partage réseau admin : [partageDSI.ps1](/Conf/partageDSI.ps1)**
 
 ### 6. VLAN
 

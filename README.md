@@ -16,8 +16,6 @@
   - [5. Partage réseau](#5-partage-réseau)
   - [6. VLAN](#6-vlan)
   - [7. Routage](#7-routage)
-  - [8. Sécurisation des routeurs](#8-sécurisations-des-routeurs)
-  - [9. IP Helper](#9-ip-helper)
 - [IV. Installation](#iv-installation)
 
 # Contexte du projet

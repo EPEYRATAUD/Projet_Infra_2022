@@ -174,16 +174,17 @@ Address:  192.168.100.2
 - Un partage pour les administrateurs : droit Contrôle Total (tout les droits + modifications des droits)
 
 1. On crée un partage SMB sur le Windows Server à l'emplacement `C:/Shares/Partage_Client` limité au groupe `Clients` pour que seuls eux et les admins y aient accès.
-2. On met en place une GPO pour le groupe `Clients` qui programme le lancement d'un script Powershell à l'ouverture de session
-3. **Voici le contenu du script :
+2. Un partage réseau reservé aux admins à : `C:/Shares/Partage_DSI`
+3. On met en place une GPO pour le groupe `Clients` qui programme le lancement d'un script Powershell à l'ouverture de session des clients & des admins
+4. On met en place une GPO pour le groupe `Admins` qui programme le lancement d'un script Powershell à l'ouverture de session des admins
+5. **Scripts pour les clients/admins :
 :file_folder: Script partage réseau client : [partageClient.ps1](/Conf/Partage/partageClient.ps1)
 :file_folder: Script partage réseau admin : [partageDSI.ps1](/Conf/Partage/partageDSI.ps1)**
 
 ### 6. VLAN
 
-- un VLAN mis en place par réseau ( un pour les clients , un pour les administrateurs et un pour le serveur )
-- Seuls les administrateurs peuvent communiquer avec le VLAN du serveur.
-- Les clients ne peuvent communiquer que sur leur VLAN
+- Configuration des trunks entre les switchs & les routeurs
+- Configuration des access pour les postes 
 
 **Conf des VLAN's sur les switch : 
 :file_folder: [Conf_VLAN_Brief](/Conf/Switchs/Conf_VLAN.txt)
@@ -207,19 +208,7 @@ A chaque démarrage de Windows, la commande sera automatiquement exécutée.
 - Si vous tapez la commande "route print" dans un invite de commandes, vous verrez que la route apparaitra dans la section "Itinéraires persistants".
 Maintenant, Windows sait qu'il devra passer par le routeur (la passerelle) 192.168.x.x pour accéder aux machines du réseau 192.168.x.x
 
-- sur client1 :
-route -p ADD 192.168.100.0 MASK 255.255.255.0 192.168.102.1
-route -p ADD 192.168.101.0 MASK 255.255.255.0 192.168.102.1
-
-- sur server1 :
-route -p ADD 192.168.101.0 MASK 255.255.255.0 192.168.100.1
-route -p ADD 192.168.102.0 MASK 255.255.255.0 192.168.100.1
-
-- sur admin1 :
-route -p ADD 192.168.100.0 MASK 255.255.255.0 192.168.101.1
-route -p ADD 192.168.102.0 MASK 255.255.255.0 192.168.101.1
-
-Ajout route par défaut vers 0.0.0.0 0.0.0.0
+Ajout route par défaut vers l'IP du routeur
 
 
 ### 8. Sécurisation des routeurs
@@ -229,4 +218,8 @@ Ajout route par défaut vers 0.0.0.0 0.0.0.0
 ## IV. Installation
 
 1. Installer [GNS3](https://www.gns3.com/software/download) & [VirtualBox](https://www.virtualbox.org/wiki/Downloads) ou [VMWare](https://customerconnect.vmware.com/fr/downloads/info/slug/desktop_end_user_computing/vmware_workstation_player/16_0)
-2. 
+2. Récuperer les appliances des routeurs C7200 et Switch cisco IOU_L2
+3. Configurer les routeurs et switchs en suivant les fichiers de configuration fournis
+4. Installer un serveur Windows avec AD-DS, DHCP, DNS, Partage de fichiers
+5. Installation de Windows 10 sur une VM puis Windows Server 2022 sur une seconde
+6. Intégration au domaine AD, obtention d'un bail DHCP sur le client

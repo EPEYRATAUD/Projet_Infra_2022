@@ -1,5 +1,4 @@
 # Projet Infra | MONTAGNIER Yrlan & PEYRATAUD Enzo
-
 # Sommaire
 
 - [TP3 : Progressons vers le réseau d'infrastructure](#tp3--progressons-vers-le-réseau-dinfrastructure)
@@ -23,9 +22,7 @@
 # Contexte du projet
 
 - Réaliser une mini infra a l'aide de l'outil GNS3 
-
 - Problématique : Simuler un cas réel d'une réalisation d'une infrastructure 
- 
 
 ## I. Logiciels & Machines utilisées
 
@@ -37,9 +34,9 @@
 - des VPC's
 
 ## II. Architecture réseaux
-
 ### Infrastructure sur GNS3
 
+![image](https://user-images.githubusercontent.com/71253160/171411052-64d87bd0-63ca-4eb6-9b5b-c2426d2f4364.png)
 
 ### A. Tableau d'adressage
 
@@ -57,19 +54,18 @@
 | Admins        | `192.168.101.0` | 101  | `192.168.101.20` - `192.168.101.200` | `255.255.255.0` (/24) | `192.168.101.1` | `192.168.101.255` |
 | Clients       | `192.168.102.0` | 102  | `192.168.102.20` - `192.168.102.200` | `255.255.255.0` (/24) | `192.168.102.1` | `192.168.102.255` |
 
-## Technologies & services utilisés/mis en place
-
+## III. Technologies & services utilisés/mis en place
 ### 1. DHCP
 
-- Service géré par le serveur : il va distribuer aux postes du réseaux une IP, le nom de domaine, l'IP du routeur ainsi que celle du serveur DNS.
+- Service installé sur le serveur : il va distribuer aux clients (Windows & VPC's) une adresse IP, le nom de domaine 'montagnier.labo', l'IP du routeur ainsi que celle du serveur DNS.
 
 **Etendue client qui distribue :**
 - Une **adresse IP** entre `192.168.102.20` & `192.168.102.200`
 - **Le nom du domaine** `montagnier.labo`
 - **L'IP de la passerelle** (routeur `R2`) qui est `192.168.102.1`
 - **L'IP du serveur DNS** (lui même car il fait les 2) donc `192.168.100.2`
-
 ![](https://i.imgur.com/9LwXnCe.png)
+
 - Sur les clients : 
 Config IP en dhcp -> ipconfig /renew
 - Sur les VPC's : 
@@ -80,13 +76,12 @@ DORA IP 192.168.102.22/24 GW 192.168.102.1
 PC2> ip dhcp
 DORA IP 192.168.102.23/24 GW 192.168.102.1
 ```
+
 Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dans l'étendue 192.168.101.:
 ![](https://i.imgur.com/q05twu0.png)
 
-
 ### 2. DNS
-
-**Service géré par le serveur : pour la traduction des noms de domaines en IP et réciproquement.**
+**Service installé sur le serveur : pour la traduction des noms de domaines en IP & inversement.**
 
 #### Zones de recherche DNS
 

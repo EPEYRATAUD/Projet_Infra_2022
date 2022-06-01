@@ -64,7 +64,7 @@
 - **Le nom du domaine** `montagnier.labo`
 - **L'IP de la passerelle** (routeur `R2`) qui est `192.168.102.1`
 - **L'IP du serveur DNS** (lui même car il fait les 2) donc `192.168.100.2`
-![](https://i.imgur.com/9LwXnCe.png)
+![Option d'étendue](/Img/Option_Etendue.png)
 
 - Sur le client windows : 
 Config IP en dhcp -> `ipconfig /renew`
@@ -78,7 +78,7 @@ DORA IP 192.168.102.23/24 GW 192.168.102.1
 ```
 
 Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dans l'étendue 192.168.101.:
-![](https://i.imgur.com/q05twu0.png)
+![Bail DHCP](/Img/Option_Etendue.png)
 
 ### 2. DNS
 **Service installé sur le serveur : pour la traduction des noms de domaines en IP & inversement.**
@@ -88,15 +88,15 @@ Bail DHCP visible sur le serveur DHCP avec l'IP du client et le nom du poste dan
 Dans le domaine `montagnier.labo`
 - Zone de recherche directe
 
-![](https://i.imgur.com/thUuNh3.png)
+![Recherche directe](/Img/Recherche_Directe.png)
 
 - Zone de recherche indirecte
 
-![](https://i.imgur.com/C5jRPLs.png)
+![Recherche indirecte 1](/Img/Recherche_Indirecte1.png)
 
-![](https://i.imgur.com/7fv2ULJ.png)
+![Recherche indirecte 2](/Img/Recherche_Indirecte2.png)
 
-![](https://i.imgur.com/lVc7yzB.png)
+![Recherche indirecte 3](/Img/Recherche_Indirecte3.png)
 
 #### Vérification du fonctionnement du DNS
 - Sur le serveur :
